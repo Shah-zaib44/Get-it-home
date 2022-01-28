@@ -2,6 +2,7 @@ import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 // import ViewCoupon from './screens/admin/ViewCoupon';
 // import AddCoupon from './screens/admin/AddCoupon';
