@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-// import MultiSlider from 'react-native-multi-slider';
+
 import {Rating} from 'react-native-ratings';
 import {Appbar, TextInput, Button, Chip} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';

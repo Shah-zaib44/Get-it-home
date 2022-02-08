@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {List, Appbar} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
-const Category = () => {
+const Categories = () => {
   return (
     <>
       <SafeAreaView
@@ -69,4 +69,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default Categories;

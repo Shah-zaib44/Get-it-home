@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Card, Title, ActivityIndicator, Colors} from 'react-native-paper';
+import {Card, Title, ActivityIndicator, Colors, List} from 'react-native-paper';
 import {View, ScrollView, TouchableOpacity} from 'react-native';
 import {Rating} from 'react-native-ratings';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -61,6 +61,15 @@ const Catalogue = ({navigation}) => {
             paddingHorizontal: 10,
             backgroundColor: 'white',
           }}>
+          <View style={{alignItems: 'flex-end'}}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Filter');
+              }}>
+              <List.Icon icon={require('../assets/filter.png')} />
+            </TouchableOpacity>
+          </View>
+
           <ScrollView>
             <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
               {data.map((data, index) => {

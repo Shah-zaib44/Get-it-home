@@ -83,8 +83,9 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
   sendTokenResponse(await user, 200, res);
 });
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email });
-
+  const user = await User.findOne({ where: { email: req.body.email } });
+  console.log("#######", req.body.email);
+  console.log("#######", user);
   if (!user) {
     return next(new ErrorResponse("There is no user with that email", 404));
   }
@@ -102,7 +103,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   const message = `We recently received a request for a forgotten password. Your verification code is: ${resetToken()}. If you did not request this change, you do not need to do anything.`;
-  console.log("#######", user);
+
   try {
     await sendEmail({
       email: user.dataValues.email,

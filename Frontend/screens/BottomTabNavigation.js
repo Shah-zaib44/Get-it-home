@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {List} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Cart from './Cart';
 import Home from './Home';
 import Search from './Search';
 import Account from './Account';
-
+import Categories from './Categories';
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
@@ -31,6 +32,20 @@ function MyTabs() {
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
             <Icon name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Categories"
+        component={Categories}
+        options={{
+          tabBarLabel: 'Categories',
+          tabBarIcon: ({color, size}) => (
+            <List.Icon
+              color={color}
+              size={size}
+              icon={require('../assets/categories.png')}
+            />
           ),
         }}
       />

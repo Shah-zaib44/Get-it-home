@@ -18,17 +18,30 @@ import Filter from './screens/Filter';
 import SignIn from './screens/SignIn';
 import ForgotPassword from './screens/ForgotPassword';
 import VerifyCode from './screens/VerifyCode';
-import Category from './screens/Category';
+import Categories from './screens/Categories';
 import BottomTabNavigation from './screens/BottomTabNavigation';
+import TopTabNavigation from './screens/admin/TopTabNavigation';
 import Profile from './screens/Profile';
 import UpdatePassword from './screens/UpdatePassword';
-
+import Cart from './screens/Cart';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="BottomTabNavigation">
+      <Stack.Navigator
+        initialRouteName="Cart
+      ">
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: 'blue',
+            },
+            headerTintColor: '#fff',
+          }}
+          name="Cart"
+          component={Cart}
+        />
         <Stack.Screen
           options={{
             headerStyle: {
@@ -41,10 +54,37 @@ const App = () => {
         />
         <Stack.Screen
           options={{
+            headerStyle: {
+              backgroundColor: 'blue',
+            },
+            headerTintColor: '#fff',
+          }}
+          name="Product"
+          component={Product}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: 'blue',
+            },
+            headerTintColor: '#fff',
+          }}
+          name="Coupon"
+          component={Coupon}
+        />
+        <Stack.Screen
+          options={{
             headerShown: false,
           }}
           name="BottomTabNavigation"
           component={BottomTabNavigation}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="TopTabNavigation"
+          component={TopTabNavigation}
         />
         <Stack.Screen
           options={{
@@ -73,8 +113,8 @@ const App = () => {
             },
             headerTintColor: '#fff',
           }}
-          name="Category"
-          component={Category}
+          name="Categories"
+          component={Categories}
         />
         <Stack.Screen
           options={{
@@ -193,16 +233,3 @@ const App = () => {
 };
 
 export default App;
-
-/* <Stack.Navigator initialRouteName="Coupon">
-      <Stack.Screen  options={{
-        
-          headerStyle: {
-            backgroundColor: 'blue',
-          },
-          headerTintColor: '#fff',
-         
-        }} name="Coupon" component={Coupon} />
-     
-     
-    </Stack.Navigator> */

@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {Appbar, List} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
-const Account = () => {
+const Account = ({navigation}) => {
   return (
     <>
       <SafeAreaView
@@ -13,6 +13,9 @@ const Account = () => {
         }}>
         <View>
           <List.Item
+            onPress={() => {
+              navigation.navigate('Profile');
+            }}
             title="Profile"
             left={props => (
               <List.Icon {...props} icon={require('../assets/profile.png')} />
