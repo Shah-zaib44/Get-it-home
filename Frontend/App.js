@@ -19,6 +19,7 @@ import SignIn from './screens/SignIn';
 import ForgotPassword from './screens/ForgotPassword';
 import VerifyCode from './screens/VerifyCode';
 import Categories from './screens/Categories';
+import ProductByCategory from './screens/ProductByCategory';
 import BottomTabNavigation from './screens/BottomTabNavigation';
 import TopTabNavigation from './screens/admin/TopTabNavigation';
 import Profile from './screens/Profile';
@@ -29,9 +30,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Cart
-      ">
+      <Stack.Navigator initialRouteName="Categories">
         <Stack.Screen
           options={{
             headerStyle: {
@@ -41,6 +40,16 @@ const App = () => {
           }}
           name="Cart"
           component={Cart}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: 'blue',
+            },
+            headerTintColor: '#fff',
+          }}
+          name="ProductByCategory"
+          component={ProductByCategory}
         />
         <Stack.Screen
           options={{
@@ -156,7 +165,6 @@ const App = () => {
           name="SignUp"
           component={SignUp}
         />
-
         <Stack.Screen
           options={{
             headerStyle: {
