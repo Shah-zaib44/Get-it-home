@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import ViewProduct from './screens/admin/ViewProduct';
@@ -25,16 +25,31 @@ import TopTabNavigation from './screens/admin/TopTabNavigation';
 import Profile from './screens/Profile';
 import UpdatePassword from './screens/UpdatePassword';
 import Cart from './screens/Cart';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const MyTheme = {
+    dark: false,
+    colors: {
+      primary: 'rgb(255, 45, 85)',
+      background: 'rgb(242, 242, 242)',
+      bottom: '#40BFFF',
+      header: '#40BFFF',
+      button: '#40BFFF',
+      slider: '#40BFFF',
+      border: 'rgb(199, 199, 204)',
+      notification: 'rgb(255, 69, 58)',
+    },
+  };
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Categories">
+    <NavigationContainer theme={MyTheme}>
+      <Stack.Navigator initialRouteName="TopTabNavigation">
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -44,7 +59,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -54,7 +69,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -64,7 +79,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -74,7 +89,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -98,7 +113,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -108,7 +123,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -118,7 +133,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -128,7 +143,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -138,7 +153,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -148,7 +163,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -158,7 +173,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -168,7 +183,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -178,7 +193,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -188,7 +203,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -198,7 +213,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -208,7 +223,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -218,7 +233,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -228,7 +243,7 @@ const App = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}

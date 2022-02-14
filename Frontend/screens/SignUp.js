@@ -5,7 +5,12 @@ import {roles} from '../data';
 import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useTheme} from '@react-navigation/native';
+
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+
 const SignUp = ({navigation}) => {
+  const {colors} = useTheme();
   const [fullName, setfullName] = React.useState('');
   const [email, setemail] = React.useState('');
   const [password, setpassword] = React.useState('');
@@ -112,7 +117,10 @@ const SignUp = ({navigation}) => {
                 })}
               </List.Accordion>
             </List.Section>
-            <Button mode="contained" onPress={e => handleSignup(e)}>
+            <Button
+              style={{backgroundColor: colors.button}}
+              mode="contained"
+              onPress={e => handleSignup(e)}>
               Sign Up
             </Button>
             <Text style={styles.text}>Already have an account? Sign In</Text>

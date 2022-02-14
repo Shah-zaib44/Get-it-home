@@ -6,7 +6,10 @@ import {TextInput, Button, List, Snackbar, Text} from 'react-native-paper';
 import * as ImagePicker from 'react-native-image-picker';
 import {brands, colours, warrantyTypes, categories} from '../../data';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useTheme} from '@react-navigation/native';
+
 const AddProduct = () => {
+  const {colors} = useTheme();
   const [category, setCategory] = React.useState('Select Category');
   const [colour, setColour] = React.useState('Select Colour');
   const [brand, setBrand] = React.useState('Select Brand');
@@ -115,7 +118,10 @@ const AddProduct = () => {
                 );
               })}
           </View>
-          <Button mode="contained" onPress={e => chooseImage(e)}>
+          <Button
+            style={{backgroundColor: colors.button}}
+            mode="contained"
+            onPress={e => chooseImage(e)}>
             Upload Image
           </Button>
           <List.Section title="Category">
@@ -199,7 +205,10 @@ const AddProduct = () => {
               })}
             </List.Accordion>
           </List.Section>
-          <Button mode="contained" onPress={e => addProduct(e)}>
+          <Button
+            style={{backgroundColor: colors.button}}
+            mode="contained"
+            onPress={e => addProduct(e)}>
             Submit
           </Button>
           <Snackbar visible={visible} onDismiss={onDismissSnackBar}>

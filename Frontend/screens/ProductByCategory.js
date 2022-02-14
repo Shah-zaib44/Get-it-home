@@ -12,8 +12,11 @@ import {
 import {Rating} from 'react-native-ratings';
 import {categories} from '../data';
 import {SafeAreaView} from 'react-native-safe-area-context';
-const ProductByCategory = ({route}) => {
-  ratingCompleted = rating => {
+import {useTheme} from '@react-navigation/native';
+
+const ProductByCategory = ({route, navigation}) => {
+  const {colors} = useTheme();
+  const ratingCompleted = rating => {
     console.log('Rating is: ' + rating);
   };
   const {category} = route.params;
@@ -113,6 +116,7 @@ const ProductByCategory = ({route}) => {
                         />
                         <Title>RS {data.productPrice}/-</Title>
                         <Button
+                          style={{backgroundColor: colors.button}}
                           labelStyle={{fontSize: 12}}
                           mode="contained"
                           onPress={() => {

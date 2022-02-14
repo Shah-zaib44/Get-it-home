@@ -8,19 +8,21 @@ import Home from './Home';
 import Search from './Search';
 import Account from './Account';
 import Categories from './Categories';
+import {useTheme} from '@react-navigation/native';
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
+  const {colors} = useTheme();
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
         headerStyle: {
-          backgroundColor: 'blue',
+          backgroundColor: colors.header,
         },
         headerTintColor: '#fff',
         tabBarStyle: {
-          backgroundColor: 'blue',
+          backgroundColor: colors.bottom,
         },
         tabBarInactiveTintColor: '#fff',
         tabBarActiveTintColor: '#fff',

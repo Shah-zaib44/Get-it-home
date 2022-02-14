@@ -11,8 +11,11 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import {SliderBox} from 'react-native-image-slider-box';
 import {Rating} from 'react-native-ratings';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const Description = ({route}) => {
+  const [userName, setuserName] = React.useState('');
   const [data, setData] = React.useState([]);
   const {id} = route.params;
   console.log('id', id);
@@ -24,6 +27,7 @@ const Description = ({route}) => {
     fetch(`http://10.0.2.2:8080/api/products/productId/${id}`)
       .then(response => response.json())
       .then(response => {
+        console.log('##', response);
         setData(response);
 
         setLoading(false);
@@ -31,8 +35,24 @@ const Description = ({route}) => {
       .catch(error => console.error(error));
   };
 
+  AsyncStorage.getAllKeys((err, keys) => {
+    AsyncStorage.multiGet(keys, (error, stores) => {
+      stores.map((result, i, store) => {
+        console.log({[store[i][0]]: store[i][1]});
+        return true;
+      });
+    });
+  });
+  const getData = async () => {
+    const user = await AsyncStorage.getItem('user');
+    if (user != null) {
+      setuserName(JSON.parse(user).data);
+    }
+  };
+
   React.useEffect(() => {
     getProductById();
+    getData();
   }, []);
   return (
     <>
@@ -136,7 +156,7 @@ const Description = ({route}) => {
                 />
               </View>
               <View>
-                <Text style={{marginLeft: 10}}>James Lawson</Text>
+                <Text style={{marginLeft: 10}}>{userName}</Text>
                 <Rating
                   style={{marginLeft: 10, alignItems: 'flex-start'}}
                   imageSize={10}

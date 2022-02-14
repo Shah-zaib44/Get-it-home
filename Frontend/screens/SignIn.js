@@ -3,9 +3,10 @@ import {View, StyleSheet, Image} from 'react-native';
 import {TextInput, Button, Text, Snackbar} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
-
+import {useTheme} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 const SignIn = ({navigation}) => {
+  const {colors} = useTheme();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -81,7 +82,10 @@ const SignIn = ({navigation}) => {
             onPress={e => handleNavigation(e)}>
             Forgot Password?
           </Text>
-          <Button mode="contained" onPress={e => handleLogin(e)}>
+          <Button
+            style={{backgroundColor: colors.button}}
+            mode="contained"
+            onPress={e => handleLogin(e)}>
             Sign In
           </Button>
 
