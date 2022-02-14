@@ -21,7 +21,7 @@ const Description = ({route}) => {
 
   const _goBack = () => console.log('Went back');
   const getProductById = () => {
-    fetch(`http://10.0.2.2:8080/api/products/${id}`)
+    fetch(`http://10.0.2.2:8080/api/products/productId/${id}`)
       .then(response => response.json())
       .then(response => {
         setData(response);

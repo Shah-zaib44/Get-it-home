@@ -136,3 +136,24 @@ exports.delete = (req, res) => {
       });
     });
 };
+exports.findByCategory = (req, res) => {
+  let { category } = req.query;
+
+  Product.findAll({
+    where: {
+      category: {
+        [Op.eq]: category,
+      },
+    },
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message ||
+          "Some error occurred while retrieving products by category",
+      });
+    });
+};

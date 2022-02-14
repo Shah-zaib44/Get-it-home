@@ -1,25 +1,28 @@
 import * as React from 'react';
+import {View, TouchableOpacity, ScrollView} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   Card,
   Title,
   ActivityIndicator,
   Colors,
-  List,
   Button,
+  List,
 } from 'react-native-paper';
-import {View, ScrollView, TouchableOpacity} from 'react-native';
 import {Rating} from 'react-native-ratings';
+import {categories} from '../data';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
-const Catalogue = ({navigation}) => {
+const ProductByCategory = ({route}) => {
   ratingCompleted = rating => {
     console.log('Rating is: ' + rating);
   };
+  const {category} = route.params;
+  console.log('Productbyat', category);
   const [isLoading, setLoading] = React.useState(true);
 
   const [data, setData] = React.useState([]);
   const getProduct = () => {
-    fetch('http://10.0.2.2:8080/api/products')
+    fetch(`http://10.0.2.2:8080/api/products/category?category=${category}`)
       .then(response => response.json())
       .then(response => {
         setData(response);
@@ -38,6 +41,7 @@ const Catalogue = ({navigation}) => {
       data: data,
     });
   };
+  console.log(data);
   React.useEffect(() => {
     getProduct();
   }, []);
@@ -129,4 +133,4 @@ const Catalogue = ({navigation}) => {
   );
 };
 
-export default Catalogue;
+export default ProductByCategory;
