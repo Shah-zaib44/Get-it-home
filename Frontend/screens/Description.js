@@ -11,9 +11,16 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import {SliderBox} from 'react-native-image-slider-box';
 import {Rating} from 'react-native-ratings';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const Description = ({route}) => {
+  const [userName, setuserName] = React.useState('');
+  const [profileImage, setprofileImage] = React.useState('');
+  console.log(userName);
   const [data, setData] = React.useState([]);
+  const [reviews, setReviews] = React.useState([]);
+
   const {id} = route.params;
   console.log('id', id);
 
@@ -24,6 +31,7 @@ const Description = ({route}) => {
     fetch(`http://10.0.2.2:8080/api/products/productId/${id}`)
       .then(response => response.json())
       .then(response => {
+        console.log('##', response);
         setData(response);
 
         setLoading(false);
@@ -31,8 +39,36 @@ const Description = ({route}) => {
       .catch(error => console.error(error));
   };
 
+  const getReviews = () => {
+    fetch(`http://10.0.2.2:8080/api/reviews/productId/${id}`)
+      .then(response => response.json())
+      .then(response => {
+        console.log('##', response);
+        setReviews(response.data);
+      })
+      .catch(error => console.error(error));
+  };
+  // AsyncStorage.setItem(
+  //   'user',
+  //   JSON.stringify({
+  //     fullName: 'Shahzaib',
+  //     profileImage:
+  //       'file:///data/user/0/com.myapp/cache/rn_image_picker_lib_temp_4605e864-ee61-470e-99c5-b843a54ca7ea.jpg',
+  //   }),
+  // );
+  const getData = async () => {
+    const user = await AsyncStorage.getItem('user');
+    if (user != null) {
+      setuserName(JSON.parse(user).fullName);
+      setprofileImage(JSON.parse(user).profileImage);
+    }
+  };
+
   React.useEffect(() => {
     getProductById();
+    getData();
+    getReviews();
+    setuserName(userName);
   }, []);
   return (
     <>
@@ -123,49 +159,42 @@ const Description = ({route}) => {
               }}>
               <Chip>{data.colour}</Chip>
             </View>
-            <Text>Product Review</Text>
 
-            <View
-              style={{
-                flexDirection: 'row',
-              }}>
-              <View>
-                <Avatar.Image
-                  size={40}
-                  source={require('../assets/PngItem_1468479.png')}
-                />
-              </View>
-              <View>
-                <Text style={{marginLeft: 10}}>James Lawson</Text>
-                <Rating
-                  style={{marginLeft: 10, alignItems: 'flex-start'}}
-                  imageSize={10}
-                  readonly={true}
-                />
-              </View>
-            </View>
-            <Text>
-              Air Max are always very comfortable fit clean and just perfect in
-              every way. 90's are and will always be one of my favourite
-            </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-              }}>
-              <Image
-                style={{width: 50, height: 50, margin: 10}}
-                source={require('../assets/PngItem_1468479.png')}
-              />
-              <Image
-                style={{width: 50, height: 50, margin: 10}}
-                source={require('../assets/PngItem_1468479.png')}
-              />
-              <Image
-                style={{width: 50, height: 50, margin: 10}}
-                source={require('../assets/PngItem_1468479.png')}
-              />
-            </View>
-            <Text>December 10, 2016</Text>
+            <Text>Product Review</Text>
+            {reviews.map((review, index) => {
+              console.log(review.rating);
+              return (
+                <View style={{marginBottom: 10}} key={index}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                    }}>
+                    <View>
+                      <Avatar.Image size={40} source={{uri: profileImage}} />
+                    </View>
+                    <View>
+                      <Text style={{marginLeft: 10}}>{userName}</Text>
+                      <Rating
+                        style={{marginLeft: 10, alignItems: 'flex-start'}}
+                        imageSize={20}
+                        readonly={true}
+                        startingValue={review.rating}
+                      />
+                    </View>
+                  </View>
+                  <Text>{review.review}</Text>
+
+                  <Text>
+                    {new Date(
+                      new Date(review.createdAt)
+                        .toISOString()
+                        .slice(0, 10)
+                        .replace('T', ' '),
+                    ).toDateString()}
+                  </Text>
+                </View>
+              );
+            })}
           </ScrollView>
         </SafeAreaView>
       )}

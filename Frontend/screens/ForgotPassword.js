@@ -2,7 +2,10 @@ import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useTheme} from '@react-navigation/native';
+
 const ForgotPassword = ({navigation}) => {
+  const {colors} = useTheme();
   const [email, setEmail] = React.useState('shahzafarzaib@gmail.com');
   const forgotPassword = e => {
     let user = {
@@ -38,7 +41,10 @@ const ForgotPassword = ({navigation}) => {
             onChangeText={email => setEmail(email)}
             style={styles.input}
           />
-          <Button mode="contained" onPress={e => forgotPassword(e)}>
+          <Button
+            style={{backgroundColor: colors.button}}
+            mode="contained"
+            onPress={e => forgotPassword(e)}>
             Request Code
           </Button>
         </View>

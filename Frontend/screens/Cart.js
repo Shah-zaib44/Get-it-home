@@ -10,9 +10,11 @@ import {
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Button} from 'react-native-paper';
+import {useTheme} from '@react-navigation/native';
 
 const Cart = ({route}) => {
   const {data} = route.params;
+  const {colors} = useTheme();
   const [cartData, setcartData] = React.useState([]);
 
   React.useEffect(() => {
@@ -199,7 +201,7 @@ const Cart = ({route}) => {
           <Text
             style={{
               color: '#fff',
-              backgroundColor: 'blue',
+              backgroundColor: colors.button,
               fontSize: 29,
               paddingHorizontal: 4,
               paddingVertical: 4,
@@ -385,7 +387,7 @@ const Cart = ({route}) => {
             paddingVertical: 20,
             paddingHorizontal: 20,
             //  flex: 0.3,
-            backgroundColor: 'blue',
+            backgroundColor: colors.button,
             borderWidth: 2,
             flexDirection: 'row',
             marginBottom: 10,

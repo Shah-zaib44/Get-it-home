@@ -2,9 +2,11 @@ import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {TextInput, Button, Snackbar} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useTheme} from '@react-navigation/native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const VerifyCode = ({navigation}) => {
+  const {colors} = useTheme();
   const [resettoken, setresettoken] = React.useState('');
   const [msg, setMsg] = React.useState('');
   const [visible, setVisible] = React.useState(false);
@@ -52,7 +54,10 @@ const VerifyCode = ({navigation}) => {
             onChangeText={resettoken => setresettoken(resettoken)}
             style={styles.input}
           />
-          <Button mode="contained" onPress={e => verifyCode(e)}>
+          <Button
+            style={{backgroundColor: colors.button}}
+            mode="contained"
+            onPress={e => verifyCode(e)}>
             Submit Code
           </Button>
           <Snackbar visible={visible} onDismiss={onDismissSnackBar}>

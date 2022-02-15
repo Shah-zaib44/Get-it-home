@@ -5,7 +5,13 @@ import {roles} from '../data';
 import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useTheme} from '@react-navigation/native';
+import * as ImagePicker from 'react-native-image-picker';
+
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+
 const SignUp = ({navigation}) => {
+  const {colors} = useTheme();
   const [fullName, setfullName] = React.useState('');
   const [email, setemail] = React.useState('');
   const [password, setpassword] = React.useState('');
@@ -19,8 +25,23 @@ const SignUp = ({navigation}) => {
   const onToggleSnackBar = () => setVisible(!visible);
 
   const onDismissSnackBar = () => setVisible(false);
+  const [profileImage, setprofileImage] = React.useState('');
+  const chooseImage = e => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.launchImageLibrary(options, response => {
+      if (response.assets[0].uri) {
+        setprofileImage(response.assets[0].uri);
+      }
+    });
+  };
   let user = {
     fullName: fullName,
+    profileImage: profileImage,
     email: email,
     password: password,
     address: address,
@@ -42,12 +63,15 @@ const SignUp = ({navigation}) => {
         console.log(response);
         if (response.token) {
           AsyncStorage.setItem('user', JSON.stringify(response));
-          navigation.navigate('Home');
+          navigation.navigate('BottomTabNavigation');
         } else if (response.error) {
           setMsg(response.error);
           onToggleSnackBar();
         }
       });
+  };
+  const handleNavigateToSignIn = e => {
+    navigation.navigate('SignIn');
   };
   return (
     <>
@@ -66,6 +90,18 @@ const SignUp = ({navigation}) => {
               onChangeText={fullName => setfullName(fullName)}
               style={styles.input}
             />
+            {profileImage !== '' && (
+              <Image
+                source={{uri: profileImage}}
+                style={{margin: 5, width: 100, height: 100}}
+              />
+            )}
+            <Button
+              style={{backgroundColor: colors.button}}
+              mode="contained"
+              onPress={e => chooseImage(e)}>
+              Upload Image
+            </Button>
             <TextInput
               label="Email"
               value={email}
@@ -112,10 +148,22 @@ const SignUp = ({navigation}) => {
                 })}
               </List.Accordion>
             </List.Section>
-            <Button mode="contained" onPress={e => handleSignup(e)}>
+            <Button
+              style={{backgroundColor: colors.button}}
+              mode="contained"
+              onPress={e => handleSignup(e)}>
               Sign Up
             </Button>
-            <Text style={styles.text}>Already have an account? Sign In</Text>
+            <Text style={styles.text}>
+              Already have an account?{' '}
+              <Text
+                style={{
+                  color: colors.text,
+                }}
+                onPress={e => handleNavigateToSignIn(e)}>
+                Sign In
+              </Text>
+            </Text>
 
             {/* size={GoogleSigninButton.Size.Wide}
   color={GoogleSigninButton.Color.Dark}

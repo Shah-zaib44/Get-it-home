@@ -69,7 +69,7 @@ exports.findAll = (req, res) => {
 // Find a single product with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
-
+  console.log("####", id);
   Product.findByPk(id)
     .then((data) => {
       if (data) {

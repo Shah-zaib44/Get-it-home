@@ -4,7 +4,10 @@ import {TextInput, Button, Snackbar} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AuthHeader from '../services/auth-header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useTheme} from '@react-navigation/native';
+
 const UpdatePassword = ({navigation}) => {
+  const {colors} = useTheme();
   const [newpassword, setnewpassword] = React.useState('');
   const [msg, setMsg] = React.useState('');
   const [visible, setVisible] = React.useState(false);
@@ -54,7 +57,10 @@ const UpdatePassword = ({navigation}) => {
             onChangeText={newpassword => setnewpassword(newpassword)}
             style={styles.input}
           />
-          <Button mode="contained" onPress={e => verifyCode(e)}>
+          <Button
+            style={{backgroundColor: colors.button}}
+            mode="contained"
+            onPress={e => verifyCode(e)}>
             Submit
           </Button>
           <Snackbar visible={visible} onDismiss={onDismissSnackBar}>

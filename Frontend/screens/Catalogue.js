@@ -10,12 +10,14 @@ import {
 import {View, ScrollView, TouchableOpacity} from 'react-native';
 import {Rating} from 'react-native-ratings';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
+import {useTheme} from '@react-navigation/native';
 const Catalogue = ({navigation}) => {
   ratingCompleted = rating => {
     console.log('Rating is: ' + rating);
   };
   const [isLoading, setLoading] = React.useState(true);
+
+  const {colors} = useTheme();
 
   const [data, setData] = React.useState([]);
   const getProduct = () => {
@@ -109,6 +111,7 @@ const Catalogue = ({navigation}) => {
                         />
                         <Title>RS {data.productPrice}/-</Title>
                         <Button
+                          style={{backgroundColor: colors.button}}
                           labelStyle={{fontSize: 12}}
                           mode="contained"
                           onPress={() => {

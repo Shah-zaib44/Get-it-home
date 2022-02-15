@@ -10,7 +10,8 @@ const crypto = require("crypto");
 var seedrandom = require("seedrandom");
 // Create and Save a new product
 exports.register = (req, res, next) => {
-  let { fullName, email, password, address, phoneNumber, role } = req.body;
+  let { fullName, profileImage, email, password, address, phoneNumber, role } =
+    req.body;
   // Check for user
   // if (!email || !password || !fullName || !address || !phoneNumber || !role) {
   //   return next(new ErrorResponse("Please fill all the fields", 400));
@@ -22,6 +23,7 @@ exports.register = (req, res, next) => {
     } else {
       const newUser = new User({
         fullName: fullName,
+        profileImage: profileImage,
         email: email,
         password: password,
         address: address,
@@ -36,6 +38,7 @@ exports.register = (req, res, next) => {
           newUser
             .save()
             .then((user) => {
+              console.log("signup clicked", user);
               sendTokenResponse(user, 200, res);
             })
             .catch((err) => {
