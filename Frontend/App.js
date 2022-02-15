@@ -38,6 +38,7 @@ const App = () => {
       header: '#40BFFF',
       button: '#40BFFF',
       slider: '#40BFFF',
+      text: '#40BFFF',
       border: 'rgb(199, 199, 204)',
       notification: 'rgb(255, 69, 58)',
     },
@@ -45,7 +46,7 @@ const App = () => {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <Stack.Navigator initialRouteName="TopTabNavigation">
+      <Stack.Navigator initialRouteName="SignUp">
         <Stack.Screen
           options={{
             headerStyle: {

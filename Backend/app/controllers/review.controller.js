@@ -12,3 +12,16 @@ exports.addReview = async (req, res, next) => {
     data: review,
   });
 };
+exports.getReviews = async (req, res, next) => {
+  if (req.params.id) {
+    const reviews = await Review.findAll({
+      where: { productId: req.params.id },
+    });
+
+    return res.status(200).json({
+      success: true,
+      count: reviews.length,
+      data: reviews,
+    });
+  }
+};

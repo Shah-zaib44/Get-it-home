@@ -76,7 +76,8 @@ const SignIn = ({navigation}) => {
           />
           <Text
             style={{
-              textDecorationLine: 'underline',
+              color: colors.text,
+
               alignSelf: 'center',
             }}
             onPress={e => handleNavigation(e)}>
@@ -104,7 +105,7 @@ const SignIn = ({navigation}) => {
             Don't have an account?{' '}
             <Text
               style={{
-                textDecorationLine: 'underline',
+                color: colors.text,
               }}
               onPress={e => handleNavigateToRegister(e)}>
               {' '}

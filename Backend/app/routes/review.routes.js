@@ -5,6 +5,7 @@ module.exports = (app) => {
   const { protect, authorize } = require("../middleware/auth.middleware");
   // Create a new Tutorial
   router.post("/", reviews.addReview);
+  router.get("/productId/:id", reviews.getReviews);
 
   app.use("/api/reviews", router);
 };

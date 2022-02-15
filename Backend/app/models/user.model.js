@@ -12,14 +12,15 @@ module.exports = (sequelize, Sequelize) => {
     address: {
       type: Sequelize.STRING,
     },
+    profileImage: {
+      type: Sequelize.STRING,
+    },
     phoneNumber: {
       type: Sequelize.STRING,
     },
     role: {
       type: Sequelize.STRING,
     },
-    resetPasswordToken: { type: Sequelize.STRING },
-    resetPasswordExpire: { type: Sequelize.DATE },
   });
 
   return User;
