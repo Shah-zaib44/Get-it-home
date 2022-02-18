@@ -8,11 +8,21 @@ import {SliderBox} from 'react-native-image-slider-box';
 const Item = ({icon, title}) => (
   <View
     style={{
-      marginTop: 20,
+      marginTop: 25,
+      margin:6
     }}>
     <Avatar.Image
-      style={{backgroundColor: 'none'}}
-      size={30}
+      style={{backgroundColor: 'none',
+      width: 60,
+      height: 60,
+      borderRadius: 100 / 2,
+      backgroundColor: "none",
+      marginBottom:2,
+      paddingVertical:4,
+      paddingHorizontal:4      
+
+    }}
+      size={50}
       source={icon}></Avatar.Image>
     <Text>{title}</Text>
   </View>
