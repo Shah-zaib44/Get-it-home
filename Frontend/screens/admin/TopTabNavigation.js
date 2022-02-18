@@ -13,7 +13,7 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="Product"
       screenOptions={{
-        tabBarLabelStyle: {fontSize: 12},
+        tabBarLabelStyle: {fontSize: 12, color: '#fff'},
         tabBarStyle: {backgroundColor: colors.header},
       }}>
       <Tab.Screen

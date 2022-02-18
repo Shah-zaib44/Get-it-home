@@ -12,7 +12,7 @@ import {Rating} from 'react-native-ratings';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useTheme} from '@react-navigation/native';
 const Catalogue = ({navigation}) => {
-  ratingCompleted = rating => {
+  const ratingCompleted = rating => {
     console.log('Rating is: ' + rating);
   };
   const [isLoading, setLoading] = React.useState(true);

@@ -31,10 +31,9 @@ const FlashScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#40BFFF',
     color: 'red',
     alignItems: 'center',
-    // backgroundColor:"#F5F5F5",
+    backgroundColor: '#F5F5F5',
     flex: 1,
     justifyContent: 'center',
   },
