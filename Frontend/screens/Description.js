@@ -16,7 +16,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const Description = ({route}) => {
   const [userName, setuserName] = React.useState('');
-  const [profileImage, setprofileImage] = React.useState('');
+  const [profileImage, setprofileImage] = React.useState(
+    '["file:///data/user/0/com.myapp/cache/rn_image_picker_lib_temp_e808c36e-2b52-4ec9-b816-52bdcdeb710c.png"]',
+  );
   console.log(userName);
   const [data, setData] = React.useState([]);
   const [reviews, setReviews] = React.useState([]);
@@ -48,14 +50,14 @@ const Description = ({route}) => {
       })
       .catch(error => console.error(error));
   };
-  // AsyncStorage.setItem(
-  //   'user',
-  //   JSON.stringify({
-  //     fullName: 'Shahzaib',
-  //     profileImage:
-  //       'file:///data/user/0/com.myapp/cache/rn_image_picker_lib_temp_4605e864-ee61-470e-99c5-b843a54ca7ea.jpg',
-  //   }),
-  // );
+  AsyncStorage.setItem(
+    'user',
+    JSON.stringify({
+      fullName: 'Shahzaib',
+      profileImage:
+        'file:///data/user/0/com.myapp/cache/rn_image_picker_lib_temp_e808c36e-2b52-4ec9-b816-52bdcdeb710c.png',
+    }),
+  );
   const getData = async () => {
     const user = await AsyncStorage.getItem('user');
     if (user != null) {

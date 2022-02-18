@@ -3,7 +3,10 @@ import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {TextInput, Button, Snackbar} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useTheme} from '@react-navigation/native';
 const EditCoupon = ({route, navigation}) => {
+  const {colors} = useTheme();
+
   const {id, name, code, amount} = route.params.data;
 
   const [couponname, setcouponName] = React.useState(name);
@@ -59,7 +62,10 @@ const EditCoupon = ({route, navigation}) => {
             onChangeText={couponamount => setcouponAmount(couponamount)}
             style={styles.input}
           />
-          <Button mode="contained" onPress={e => editCoupon(e)}>
+          <Button
+            style={{backgroundColor: colors.button}}
+            mode="contained"
+            onPress={e => editCoupon(e)}>
             Apply
           </Button>
           <Snackbar visible={visible} onDismiss={onDismissSnackBar}>

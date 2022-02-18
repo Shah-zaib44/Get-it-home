@@ -7,7 +7,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setfirst(false);
-    }, 3000);
+    }, 1000);
   }, []);
 
   return (
