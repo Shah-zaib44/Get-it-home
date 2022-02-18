@@ -1,17 +1,17 @@
 import React from 'react';
 
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import ViewProduct from '../screens/admin/ViewProduct';
-import AddProduct from '../screens/admin/AddProduct';
-import Product from '../screens/admin/Product';
+import ViewProduct from './admin/ViewProduct';
+import AddProduct from './admin/AddProduct';
+import Product from './admin/Product';
 import Catalogue from './Catalogue';
 import Description from './Description';
-import ViewCoupon from '../screens/admin/ViewCoupon';
-import EditCoupon from '../screens/admin/EditCoupon';
-import AddCoupon from '../screens/admin/AddCoupon';
-import Coupon from '../screens/admin/Coupon';
+import ViewCoupon from './admin/ViewCoupon';
+import EditCoupon from './admin/EditCoupon';
+import AddCoupon from './admin/AddCoupon';
+import Coupon from './admin/Coupon';
 import SignUp from './SignUp';
 import Filter from './Filter';
 
@@ -21,21 +21,36 @@ import VerifyCode from './VerifyCode';
 import Categories from './Categories';
 import ProductByCategory from './ProductByCategory';
 import BottomTabNavigation from './BottomTabNavigation';
-import TopTabNavigation from '../screens/admin/TopTabNavigation';
+import TopTabNavigation from './admin/TopTabNavigation';
 import Profile from './Profile';
 import UpdatePassword from './UpdatePassword';
 import Cart from './Cart';
-import FlashScreen from './FlashScreen';
+
 const Stack = createNativeStackNavigator();
 
-const NavigationScreens = () => {
+const App = () => {
+  const MyTheme = {
+    dark: false,
+    colors: {
+      primary: 'rgb(255, 45, 85)',
+      background: 'rgb(242, 242, 242)',
+      bottom: '#40BFFF',
+      header: '#40BFFF',
+      button: '#40BFFF',
+      slider: '#40BFFF',
+      text: '#40BFFF',
+      border: 'rgb(199, 199, 204)',
+      notification: 'rgb(255, 69, 58)',
+    },
+  };
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="SignIn">
+    <NavigationContainer theme={MyTheme}>
+      <Stack.Navigator initialRouteName="SignUp">
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -45,18 +60,17 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
           name="ProductByCategory"
           component={ProductByCategory}
         />
-         
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -66,7 +80,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -76,7 +90,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -100,7 +114,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -110,7 +124,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -120,7 +134,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -130,7 +144,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -140,7 +154,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -150,7 +164,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -160,7 +174,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -170,7 +184,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -180,7 +194,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -190,7 +204,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -200,7 +214,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -210,7 +224,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -220,7 +234,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -230,7 +244,7 @@ const NavigationScreens = () => {
         <Stack.Screen
           options={{
             headerStyle: {
-              backgroundColor: 'blue',
+              backgroundColor: MyTheme.colors.header,
             },
             headerTintColor: '#fff',
           }}
@@ -242,4 +256,4 @@ const NavigationScreens = () => {
   );
 };
 
-export default NavigationScreens;
+export default App;

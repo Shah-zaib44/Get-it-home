@@ -22,4 +22,5 @@ db.sequelize = sequelize;
 db.products = require("./product.model.js")(sequelize, Sequelize);
 db.coupons = require("./coupon.model.js")(sequelize, Sequelize);
 db.users = require("./user.model.js")(sequelize, Sequelize);
+db.reviews = require("./review.model.js")(sequelize, Sequelize);
 module.exports = db;

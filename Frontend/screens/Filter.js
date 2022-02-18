@@ -2,10 +2,23 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 import {Rating} from 'react-native-ratings';
-import {Appbar, TextInput, Button, Chip} from 'react-native-paper';
+import {Appbar, TextInput, Button, Chip, useTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import {SafeAreaView} from 'react-native-safe-area-context';
+const MyTheme = {
+  dark: false,
+  colors: {
+    primary: 'rgb(255, 45, 85)',
+    background: 'rgb(242, 242, 242)',
+    bottom: '#40BFFF',
+    header: '#40BFFF',
+    button: '#40BFFF',
+    slider: '#40BFFF',
+    border: 'rgb(199, 199, 204)',
+    notification: 'rgb(255, 69, 58)',
+  },
+};
 class Filter extends React.Component {
   ratingCompleted = rating => {
     console.log('Rating is: ' + rating);
@@ -48,16 +61,16 @@ class Filter extends React.Component {
                 />
               </View>
             </View>
-
-            <MultiSlider
-              values={[this.state.values[0], this.state.values[1]]}
-              sliderLength={280}
-              onValuesChange={this.multiSliderValuesChange}
-              min={0}
-              max={10}
-              step={1}
-            />
-
+            <View style={{alignItems: 'center'}}>
+              <MultiSlider
+                values={[this.state.values[0], this.state.values[1]]}
+                sliderLength={280}
+                onValuesChange={this.multiSliderValuesChange}
+                min={0}
+                max={10}
+                step={1}
+              />
+            </View>
             <Text>Rating</Text>
             <Rating
               onFinishRating={this.ratingCompleted}
@@ -216,7 +229,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
   },
-  button: {width: '90%'},
+  button: {width: '90%', backgroundColor: MyTheme.colors.button},
   input: {
     textAlign: 'center',
     width: '90%',
