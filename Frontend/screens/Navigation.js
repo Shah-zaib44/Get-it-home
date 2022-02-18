@@ -46,7 +46,7 @@ const App = () => {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <Stack.Navigator initialRouteName="SignUp">
+      <Stack.Navigator initialRouteName="BottomTabNavigation">
         <Stack.Screen
           options={{
             headerStyle: {

@@ -3,7 +3,32 @@ import {View} from 'react-native';
 import {List, Avatar, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Profile = () => {
+  const [user, setUser] = React.useState([]);
+
+  AsyncStorage.setItem(
+    'user',
+    JSON.stringify({
+      fullName: 'Shahzaib',
+      profileImage:
+        'file:///data/user/0/com.myapp/cache/rn_image_picker_lib_temp_e808c36e-2b52-4ec9-b816-52bdcdeb710c.png',
+
+      email: 'shahzafarzaib@gmail.com',
+      phoneNumber: '03472801994',
+      password: 'abc123',
+    }),
+  );
+  const getData = async () => {
+    const user = await AsyncStorage.getItem('user');
+    if (user != null) {
+      setUser(JSON.parse(user));
+    }
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
   return (
     <>
       <SafeAreaView
@@ -13,12 +38,11 @@ const Profile = () => {
         }}>
         <View>
           <List.Item
-            title="Name"
-            description="Name"
+            title={user.fullName}
             left={props => (
               <Avatar.Image
                 {...props}
-                source={require('../assets/user.png')}></Avatar.Image>
+                source={{uri: user.profileImage}}></Avatar.Image>
             )}></List.Item>
           <List.Item
             title="Name"
@@ -28,7 +52,7 @@ const Profile = () => {
             right={props => (
               <>
                 <Text {...props} style={{marginTop: 10}}>
-                  Name <Icon {...props} name="chevron-right" />
+                  {user.fullName} <Icon {...props} name="chevron-right" />
                 </Text>
               </>
             )}></List.Item>
@@ -41,7 +65,7 @@ const Profile = () => {
             right={props => (
               <>
                 <Text {...props} style={{marginTop: 10}}>
-                  Email <Icon {...props} name="chevron-right" />
+                  {user.email} <Icon {...props} name="chevron-right" />
                 </Text>
               </>
             )}></List.Item>
@@ -54,7 +78,7 @@ const Profile = () => {
             right={props => (
               <>
                 <Text {...props} style={{marginTop: 10}}>
-                  Phone Number <Icon {...props} name="chevron-right" />
+                  {user.phoneNumber} <Icon {...props} name="chevron-right" />
                 </Text>
               </>
             )}
@@ -68,7 +92,7 @@ const Profile = () => {
             right={props => (
               <>
                 <Text {...props} style={{marginTop: 10}}>
-                  Change Password <Icon {...props} name="chevron-right" />
+                  {user.password} <Icon {...props} name="chevron-right" />
                 </Text>
               </>
             )}></List.Item>

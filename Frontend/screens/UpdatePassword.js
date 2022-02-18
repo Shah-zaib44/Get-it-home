@@ -52,6 +52,7 @@ const UpdatePassword = ({navigation}) => {
         }}>
         <View>
           <TextInput
+            secureTextEntry
             label="New Password"
             value={newpassword}
             onChangeText={newpassword => setnewpassword(newpassword)}
