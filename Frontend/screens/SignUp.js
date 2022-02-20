@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View, StyleSheet, Image, ScrollView} from 'react-native';
 import {TextInput, Text, Button, List, Snackbar} from 'react-native-paper';
 import {roles} from '../data';
-import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useTheme} from '@react-navigation/native';
@@ -165,14 +165,6 @@ const SignUp = ({navigation}) => {
               </Text>
             </Text>
 
-            {/* size={GoogleSigninButton.Size.Wide}
-  color={GoogleSigninButton.Color.Dark}
-  onPress={this._signIn}
-  disabled={this.state.isSigninInProgress} */}
-            {/* <GoogleSigninButton
-          style={styles.text}
-          size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Dark}></GoogleSigninButton> */}
             <Snackbar visible={visible} onDismiss={onDismissSnackBar}>
               {msg}
             </Snackbar>

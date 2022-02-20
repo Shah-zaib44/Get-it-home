@@ -14,7 +14,7 @@ import AddCoupon from './admin/AddCoupon';
 import Coupon from './admin/Coupon';
 import SignUp from './SignUp';
 import Filter from './Filter';
-
+import Success from './Success';
 import SignIn from './SignIn';
 import ForgotPassword from './ForgotPassword';
 import VerifyCode from './VerifyCode';
@@ -25,6 +25,7 @@ import TopTabNavigation from './admin/TopTabNavigation';
 import Profile from './Profile';
 import UpdatePassword from './UpdatePassword';
 import Cart from './Cart';
+import NotFound from './NotFound';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,26 @@ const App = () => {
           }}
           name="Cart"
           component={Cart}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: MyTheme.colors.header,
+            },
+            headerTintColor: '#fff',
+          }}
+          name="NotFound"
+          component={NotFound}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: MyTheme.colors.header,
+            },
+            headerTintColor: '#fff',
+          }}
+          name="Success"
+          component={Success}
         />
         <Stack.Screen
           options={{

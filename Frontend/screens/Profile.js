@@ -16,7 +16,7 @@ const Profile = () => {
 
       email: 'shahzafarzaib@gmail.com',
       phoneNumber: '03472801994',
-      password: 'abc123',
+      address: 'R 19 block 10 FB Area',
     }),
   );
   const getData = async () => {
@@ -52,7 +52,7 @@ const Profile = () => {
             right={props => (
               <>
                 <Text {...props} style={{marginTop: 10}}>
-                  {user.fullName} <Icon {...props} name="chevron-right" />
+                  {user.fullName}
                 </Text>
               </>
             )}></List.Item>
@@ -65,7 +65,7 @@ const Profile = () => {
             right={props => (
               <>
                 <Text {...props} style={{marginTop: 10}}>
-                  {user.email} <Icon {...props} name="chevron-right" />
+                  {user.email}
                 </Text>
               </>
             )}></List.Item>
@@ -78,21 +78,21 @@ const Profile = () => {
             right={props => (
               <>
                 <Text {...props} style={{marginTop: 10}}>
-                  {user.phoneNumber} <Icon {...props} name="chevron-right" />
+                  {user.phoneNumber}
                 </Text>
               </>
             )}
           />
 
           <List.Item
-            title="Change Password"
+            title="Address"
             left={props => (
-              <List.Icon {...props} icon={require('../assets/password.png')} />
+              <List.Icon {...props} icon={require('../assets/address.png')} />
             )}
             right={props => (
               <>
                 <Text {...props} style={{marginTop: 10}}>
-                  {user.password} <Icon {...props} name="chevron-right" />
+                  {user.address}
                 </Text>
               </>
             )}></List.Item>

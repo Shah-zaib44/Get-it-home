@@ -9,26 +9,26 @@ const Item = ({icon, title}) => (
   <View
     style={{
       marginTop: 25,
-      margin:6
+      margin: 6,
     }}>
     <Avatar.Image
-      style={{backgroundColor: 'none',
-      width: 60,
-      height: 60,
-      borderRadius: 100 / 2,
-      backgroundColor: "none",
-      marginBottom:2,
-      paddingVertical:4,
-      paddingHorizontal:4      
-
-    }}
+      style={{
+        backgroundColor: 'none',
+        width: 60,
+        height: 60,
+        borderRadius: 100 / 2,
+        backgroundColor: 'none',
+        marginBottom: 2,
+        paddingVertical: 4,
+        paddingHorizontal: 4,
+      }}
       size={50}
       source={icon}></Avatar.Image>
     <Text>{title}</Text>
   </View>
 );
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [images] = React.useState([
     'https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ',
     'https://i.picsum.photos/id/1014/6016/4000.jpg?hmac=yMXsznFliL_Y2E2M-qZEsOZE1micNu8TwgNlHj7kzs8',
@@ -42,17 +42,22 @@ const Home = () => {
           flex: 1,
           backgroundColor: 'white',
         }}>
-        <SliderBox images={images} />
         <ScrollView>
+          <SliderBox
+            images={images}
+            dotColor="#FFEE58"
+            inactiveDotColor="#90A4AE"
+            autoplay
+            circleLoop
+          />
           <FlatList
             horizontal={true}
             data={categories}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />
+          <Catalogue navigation={navigation} />
         </ScrollView>
-
-        <Catalogue />
       </SafeAreaView>
     </>
   );

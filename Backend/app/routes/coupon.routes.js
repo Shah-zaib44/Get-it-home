@@ -8,7 +8,7 @@ module.exports = (app) => {
 
   // Retrieve all product
   router.get("/", coupons.findAll);
-
+  router.post("/validateCoupon", coupons.validateCoupon);
   // Update a Tutorial with id
   router.put("/:id", coupons.update);
 

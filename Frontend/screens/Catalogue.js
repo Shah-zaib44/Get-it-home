@@ -11,6 +11,7 @@ import {View, ScrollView, TouchableOpacity} from 'react-native';
 import {Rating} from 'react-native-ratings';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useTheme} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Catalogue = ({navigation}) => {
   const ratingCompleted = rating => {
     console.log('Rating is: ' + rating);
@@ -35,10 +36,29 @@ const Catalogue = ({navigation}) => {
     });
   };
   const handleCart = data => {
-    console.log('Catalogue data:', data);
-    navigation.navigate('Cart', {
-      data: data,
-    });
+    AsyncStorage.getItem('cart')
+      .then(datacart => {
+        if (datacart !== null) {
+          // We have data!!
+          const cart = JSON.parse(datacart);
+          data['quantity'] = 1;
+          console.log('45====>', data);
+          cart.push(data);
+          AsyncStorage.setItem('cart', JSON.stringify(cart));
+          navigation.navigate('Cart');
+        } else {
+          const cart = [];
+          data['quantity'] = 1;
+          console.log('45====>', data);
+          cart.push(data);
+          AsyncStorage.setItem('cart', JSON.stringify(cart));
+          navigation.navigate('Cart');
+        }
+        console.log('Add Cart');
+      })
+      .catch(err => {
+        alert(err);
+      });
   };
   React.useEffect(() => {
     getProduct();
@@ -75,15 +95,6 @@ const Catalogue = ({navigation}) => {
             paddingHorizontal: 10,
             backgroundColor: 'white',
           }}>
-          <View style={{alignItems: 'flex-end'}}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Filter');
-              }}>
-              <List.Icon icon={require('../assets/filter.png')} />
-            </TouchableOpacity>
-          </View>
-
           <ScrollView>
             <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
               {data.map((data, index) => {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import {TextInput, Button, Text, Snackbar} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
+
 import {useTheme} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 const SignIn = ({navigation}) => {
@@ -90,14 +90,6 @@ const SignIn = ({navigation}) => {
             Sign In
           </Button>
 
-          {/* size={GoogleSigninButton.Size.Wide}
-  color={GoogleSigninButton.Color.Dark}
-  onPress={this._signIn}
-  disabled={this.state.isSigninInProgress} */}
-          {/* <GoogleSigninButton
-          style={styles.text}
-          size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Dark}></GoogleSigninButton> */}
           <Text
             style={{
               alignSelf: 'center',

@@ -1,5 +1,6 @@
 const db = require("../models");
 const Coupon = db.coupons;
+const ErrorResponse = require("../utils/errorResponse");
 const Op = db.Sequelize.Op;
 
 // Create and Save a new product
@@ -39,7 +40,17 @@ exports.findAll = (req, res) => {
       });
     });
 };
-
+exports.validateCoupon = (req, res, next) => {
+  const { code } = req.body;
+  Coupon.findOne({ where: { code: code } }).then((coupon) => {
+    if (coupon == null) {
+      return next(new ErrorResponse("Invalid credentials", 401));
+    }
+    res.status(200).send({
+      success: "true",
+    });
+  });
+};
 // Update a product by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
