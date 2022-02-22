@@ -19,7 +19,7 @@ const Item = ({icon, title}) => (
       backgroundColor: "none",
       marginBottom:2,
       paddingVertical:4,
-      paddingHorizontal:4      
+      paddingHorizontal:4,      
 
     }}
       size={50}
