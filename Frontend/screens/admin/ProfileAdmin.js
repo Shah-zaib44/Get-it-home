@@ -4,7 +4,7 @@ import {List, Avatar, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const Profile = () => {
+const ProfileAdmin = () => {
   const [user, setUser] = React.useState([]);
 
   // AsyncStorage.setItem(
@@ -41,7 +41,10 @@ const Profile = () => {
           <List.Item
             title="Name"
             left={props => (
-              <List.Icon {...props} icon={require('../assets/profile.png')} />
+              <List.Icon
+                {...props}
+                icon={require('../../assets/profile.png')}
+              />
             )}
             right={props => (
               <>
@@ -54,7 +57,7 @@ const Profile = () => {
           <List.Item
             title="Email"
             left={props => (
-              <List.Icon {...props} icon={require('../assets/email.png')} />
+              <List.Icon {...props} icon={require('../../assets/email.png')} />
             )}
             right={props => (
               <>
@@ -67,7 +70,7 @@ const Profile = () => {
           <List.Item
             title="Phone Number"
             left={props => (
-              <List.Icon {...props} icon={require('../assets/phone.png')} />
+              <List.Icon {...props} icon={require('../../assets/phone.png')} />
             )}
             right={props => (
               <>
@@ -81,7 +84,10 @@ const Profile = () => {
           <List.Item
             title="Address"
             left={props => (
-              <List.Icon {...props} icon={require('../assets/address.png')} />
+              <List.Icon
+                {...props}
+                icon={require('../../assets/address.png')}
+              />
             )}
             right={props => (
               <>
@@ -96,4 +102,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileAdmin;

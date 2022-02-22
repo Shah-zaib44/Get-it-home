@@ -20,9 +20,7 @@ const MyTheme = {
   },
 };
 class Filter extends React.Component {
-  ratingCompleted = rating => {
-    console.log('Rating is: ' + rating);
-  };
+  ratingCompleted = rating => {};
   state = {
     text: '',
   };
@@ -202,7 +200,7 @@ class Filter extends React.Component {
                 <Button
                   style={styles.button}
                   mode="contained"
-                  onPress={() => console.log('Pressed')}>
+                  onPress={() => {}}>
                   Reset
                 </Button>
               </View>
@@ -210,7 +208,7 @@ class Filter extends React.Component {
                 <Button
                   style={styles.button}
                   mode="contained"
-                  onPress={() => console.log('Pressed')}>
+                  onPress={() => {}}>
                   Done
                 </Button>
               </View>

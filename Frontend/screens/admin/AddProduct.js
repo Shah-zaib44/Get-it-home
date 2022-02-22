@@ -26,7 +26,7 @@ const AddProduct = () => {
   const handlePressBrand = () => setExpandedBrand(!expandedBrand);
   const handlePresswarrantyType = () =>
     setExpandedwarrantyType(!expandedwarrantyType);
-  const [productImage, setproductImage] = React.useState([]);
+  const [productImage, setproductImage] = React.useState('');
   const chooseImage = e => {
     let options = {
       storageOptions: {
@@ -36,11 +36,11 @@ const AddProduct = () => {
     };
     ImagePicker.launchImageLibrary(options, response => {
       if (response.assets[0].uri) {
-        setproductImage(prevState => [...prevState, response.assets[0].uri]);
+        setproductImage(response.assets[0].uri);
       }
     });
   };
-  console.log('res:', productImage);
+
   const [productName, setproductName] = React.useState('');
   const [productDescription, setproductDescription] = React.useState('');
   const [productPrice, setproductPrice] = React.useState('');
@@ -51,13 +51,12 @@ const AddProduct = () => {
   const onDismissSnackBar = () => setVisible(false);
 
   const addProduct = async e => {
-    console.log(await AuthHeader());
     let headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };
     headers = {...headers, ...(await AuthHeader())};
-    console.log(headers);
+
     fetch('http://10.0.2.2:8080/api/products', {
       method: 'POST',
       mode: 'no-cors',
@@ -107,16 +106,12 @@ const AddProduct = () => {
           />
           <Text style={styles.text}> Product Image</Text>
           <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
-            {productImage.length > 0 &&
-              productImage.map((productImage, index) => {
-                return (
-                  <Image
-                    key={index}
-                    source={{uri: productImage}}
-                    style={{margin: 5, width: 100, height: 100}}
-                  />
-                );
-              })}
+            {productImage != '' && (
+              <Image
+                source={{uri: productImage}}
+                style={{margin: 5, width: 100, height: 100}}
+              />
+            )}
           </View>
           <Button
             style={{backgroundColor: colors.button}}

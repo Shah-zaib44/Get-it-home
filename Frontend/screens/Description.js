@@ -19,21 +19,19 @@ const Description = ({route}) => {
   const [profileImage, setprofileImage] = React.useState(
     '["file:///data/user/0/com.myapp/cache/rn_image_picker_lib_temp_e808c36e-2b52-4ec9-b816-52bdcdeb710c.png"]',
   );
-  console.log(userName);
+
   const [data, setData] = React.useState([]);
   const [reviews, setReviews] = React.useState([]);
 
   const {id} = route.params;
-  console.log('id', id);
 
   const [isLoading, setLoading] = React.useState(true);
 
-  const _goBack = () => console.log('Went back');
+  const _goBack = () => {};
   const getProductById = () => {
     fetch(`http://10.0.2.2:8080/api/products/productId/${id}`)
       .then(response => response.json())
       .then(response => {
-        console.log('##', response);
         setData(response);
 
         setLoading(false);
@@ -45,24 +43,23 @@ const Description = ({route}) => {
     fetch(`http://10.0.2.2:8080/api/reviews/productId/${id}`)
       .then(response => response.json())
       .then(response => {
-        console.log('##', response);
         setReviews(response.data);
       })
       .catch(error => console.error(error));
   };
-  AsyncStorage.setItem(
-    'user',
-    JSON.stringify({
-      fullName: 'Shahzaib',
-      profileImage:
-        'file:///data/user/0/com.myapp/cache/rn_image_picker_lib_temp_e808c36e-2b52-4ec9-b816-52bdcdeb710c.png',
-    }),
-  );
+  // AsyncStorage.setItem(
+  //   'user',
+  //   JSON.stringify({
+  //     fullName: 'Shahzaib',
+  //     profileImage:
+  //       'file:///data/user/0/com.myapp/cache/rn_image_picker_lib_temp_e808c36e-2b52-4ec9-b816-52bdcdeb710c.png',
+  //   }),
+  // );
   const getData = async () => {
     const user = await AsyncStorage.getItem('user');
     if (user != null) {
-      setuserName(JSON.parse(user).fullName);
-      setprofileImage(JSON.parse(user).profileImage);
+      setuserName(JSON.parse(user).user.fullName);
+      setprofileImage(JSON.parse(JSON.parse(user).user.profileImage)[0]);
     }
   };
 
@@ -105,11 +102,7 @@ const Description = ({route}) => {
             backgroundColor: 'white',
           }}>
           <ScrollView>
-            <SliderBox
-              images={
-                data.productImage != null && JSON.parse(data.productImage)
-              }
-            />
+            <SliderBox images={Array.from(data.productImage)} />
             <View
               style={{
                 flexDirection: 'row',
@@ -164,7 +157,6 @@ const Description = ({route}) => {
 
             <Text>Product Review</Text>
             {reviews.map((review, index) => {
-              console.log(review.rating);
               return (
                 <View style={{marginBottom: 10}} key={index}>
                   <View

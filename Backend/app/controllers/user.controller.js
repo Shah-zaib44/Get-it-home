@@ -17,7 +17,6 @@ exports.register = (req, res, next) => {
   //   return next(new ErrorResponse("Please fill all the fields", 400));
   // }
   User.findOne({ where: { email: email } }).then((user) => {
-    console.log("###", user != null);
     if (user) {
       return next(new ErrorResponse("Email already exists", 400));
     } else {
@@ -38,7 +37,6 @@ exports.register = (req, res, next) => {
           newUser
             .save()
             .then((user) => {
-              console.log("signup clicked", user);
               sendTokenResponse(user, 200, res);
             })
             .catch((err) => {
@@ -65,7 +63,7 @@ exports.login = (req, res, next) => {
 
     // Check if password matches
     const isMatch = bcrypt.compareSync(password, user.dataValues.password);
-    console.log(!isMatch);
+
     if (!isMatch) {
       return next(new ErrorResponse("Invalid credentials", 401));
     }
@@ -82,13 +80,12 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 
   user.dataValues.password = req.body.newPassword;
   await user.save();
-  console.log(await user);
+
   sendTokenResponse(await user, 200, res);
 });
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ where: { email: req.body.email } });
-  console.log("#######", req.body.email);
-  console.log("#######", user);
+
   if (!user) {
     return next(new ErrorResponse("There is no user with that email", 404));
   }
@@ -116,7 +113,6 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 
     return res.status(200).json({ success: true, data: "Email sent" });
   } catch (err) {
-    console.log(err);
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
 
@@ -152,6 +148,7 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
 
 const sendTokenResponse = (user, statusCode, res) => {
   // Create token
+
   const token = jwt.sign({ id: user.dataValues.id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
@@ -166,6 +163,7 @@ const sendTokenResponse = (user, statusCode, res) => {
   res.status(statusCode).cookie("token", token, options).json({
     success: true,
     token,
+    user: user.dataValues,
   });
 };
 // Retrieve all products from the database.

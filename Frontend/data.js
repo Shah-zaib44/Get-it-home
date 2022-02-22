@@ -16,7 +16,7 @@ let categories = [
   },
   {
     id: 4,
-    title: 'Protectors',
+    title: 'Protector',
     icon: require('./assets/protectors.png'),
   },
   {
@@ -31,7 +31,7 @@ let categories = [
   },
   {
     id: 7,
-    title: 'Power Banks',
+    title: 'Power Bank',
     icon: require('./assets/powerbank.png'),
   },
 ];

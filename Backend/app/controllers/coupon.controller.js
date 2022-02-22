@@ -13,7 +13,7 @@ exports.create = (req, res) => {
     code: code,
     amount: amount,
   };
-  console.log(coupon);
+
   // Save product in the database
   Coupon.create(coupon)
     .then((data) => {

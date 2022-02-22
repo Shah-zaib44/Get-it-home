@@ -25,7 +25,7 @@ const SignUp = ({navigation}) => {
   const onToggleSnackBar = () => setVisible(!visible);
 
   const onDismissSnackBar = () => setVisible(false);
-  const [profileImage, setprofileImage] = React.useState('');
+  const [profileImage, setprofileImage] = React.useState([]);
   const chooseImage = e => {
     let options = {
       storageOptions: {
@@ -35,7 +35,7 @@ const SignUp = ({navigation}) => {
     };
     ImagePicker.launchImageLibrary(options, response => {
       if (response.assets[0].uri) {
-        setprofileImage(response.assets[0].uri);
+        setprofileImage(prevState => [...prevState, response.assets[0].uri]);
       }
     });
   };
@@ -60,10 +60,9 @@ const SignUp = ({navigation}) => {
     })
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         if (response.token) {
           AsyncStorage.setItem('user', JSON.stringify(response));
-          navigation.navigate('BottomTabNavigation');
+          navigation.navigate('SignIn');
         } else if (response.error) {
           setMsg(response.error);
           onToggleSnackBar();
@@ -90,9 +89,9 @@ const SignUp = ({navigation}) => {
               onChangeText={fullName => setfullName(fullName)}
               style={styles.input}
             />
-            {profileImage !== '' && (
+            {profileImage.length > 0 && (
               <Image
-                source={{uri: profileImage}}
+                source={{uri: profileImage[0]}}
                 style={{margin: 5, width: 100, height: 100}}
               />
             )}

@@ -33,7 +33,6 @@ const EditCoupon = ({route, navigation}) => {
     })
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         setMsg('Data has been edited successfully');
         onToggleSnackBar();
         navigation.goBack();

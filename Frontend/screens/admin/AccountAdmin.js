@@ -5,7 +5,7 @@ import {Appbar, List} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Account = ({navigation}) => {
+const AccountAdmin = ({navigation}) => {
   async function removeItemValue(key) {
     try {
       await AsyncStorage.removeItem(key);
@@ -26,11 +26,14 @@ const Account = ({navigation}) => {
         <View>
           <List.Item
             onPress={() => {
-              navigation.navigate('Profile');
+              navigation.navigate('ProfileAdmin');
             }}
             title="Profile"
             left={props => (
-              <List.Icon {...props} icon={require('../assets/profile.png')} />
+              <List.Icon
+                {...props}
+                icon={require('../../assets/profile.png')}
+              />
             )}
           />
 
@@ -41,7 +44,7 @@ const Account = ({navigation}) => {
             }}
             title="Logout"
             left={props => (
-              <List.Icon {...props} icon={require('../assets/logout.png')} />
+              <List.Icon {...props} icon={require('../../assets/logout.png')} />
             )}
           />
         </View>
@@ -50,4 +53,4 @@ const Account = ({navigation}) => {
   );
 };
 
-export default Account;
+export default AccountAdmin;

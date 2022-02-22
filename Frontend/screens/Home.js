@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, FlatList, ScrollView} from 'react-native';
+import {View, FlatList, ScrollView, Image} from 'react-native';
 import Catalogue from './Catalogue';
 import {Avatar, Text} from 'react-native-paper';
 import {categories} from '../data';
@@ -11,19 +11,18 @@ const Item = ({icon, title}) => (
       marginTop: 25,
       margin: 6,
     }}>
-    <Avatar.Image
+    <Image
       style={{
-        backgroundColor: 'none',
-        width: 60,
-        height: 60,
-        borderRadius: 100 / 2,
-        backgroundColor: 'none',
+        width: 50,
+        height: 50,
+
         marginBottom: 2,
         paddingVertical: 4,
         paddingHorizontal: 4,
       }}
       size={50}
-      source={icon}></Avatar.Image>
+      source={icon}
+    />
     <Text>{title}</Text>
   </View>
 );

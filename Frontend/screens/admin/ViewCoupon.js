@@ -41,7 +41,6 @@ const ViewCoupon = ({navigation}) => {
     })
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         setMsg('Data has been deleted successfully');
         onToggleSnackBar();
         viewCoupon();

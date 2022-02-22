@@ -28,7 +28,6 @@ const VerifyCode = ({navigation}) => {
     })
       .then(response => response.json())
       .then(response => {
-        console.log(response.token);
         if (response.token) {
           AsyncStorage.setItem('user', JSON.stringify(response));
           navigation.navigate('UpdatePassword');

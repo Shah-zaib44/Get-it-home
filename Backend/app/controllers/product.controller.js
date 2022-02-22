@@ -4,7 +4,6 @@ const Op = db.Sequelize.Op;
 const ErrorResponse = require("../utils/errorResponse");
 // Create and Save a new product
 exports.create = (req, res, next) => {
-  console.log("###create");
   let {
     productName,
     productPrice,
@@ -27,7 +26,7 @@ exports.create = (req, res, next) => {
     brand: brand,
     warrantyType: warrantyType,
   };
-  console.log(product);
+
   // Save product in the database
   Product.create(product)
     .then((data) => {
@@ -69,7 +68,7 @@ exports.findAll = (req, res) => {
 // Find a single product with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
-  console.log("####", id);
+
   Product.findByPk(id)
     .then((data) => {
       if (data) {

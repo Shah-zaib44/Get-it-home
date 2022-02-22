@@ -7,6 +7,7 @@ import {useTheme} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 const SignIn = ({navigation}) => {
   const {colors} = useTheme();
+  const [userRole, setuserRole] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -32,10 +33,14 @@ const SignIn = ({navigation}) => {
     })
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         if (response.token) {
           AsyncStorage.setItem('user', JSON.stringify(response));
-          navigation.navigate('BottomTabNavigation');
+          console.log(userRole);
+          if (response.user.role === 'User') {
+            navigation.navigate('BottomTabNavigation');
+          } else {
+            navigation.navigate('BottomTabNavigationAdmin');
+          }
         } else if (response.error) {
           onDismissSnackBar();
           setMsg(response.error);
@@ -49,6 +54,17 @@ const SignIn = ({navigation}) => {
   const handleNavigation = e => {
     navigation.navigate('ForgotPassword');
   };
+  const getData = async () => {
+    const user = await AsyncStorage.getItem('user');
+
+    if (user != null) {
+      setuserRole(JSON.parse(user).user.role);
+    }
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
   return (
     <>
       <SafeAreaView

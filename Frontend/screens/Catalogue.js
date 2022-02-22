@@ -13,9 +13,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useTheme} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const Catalogue = ({navigation}) => {
-  const ratingCompleted = rating => {
-    console.log('Rating is: ' + rating);
-  };
+  const ratingCompleted = rating => {};
   const [isLoading, setLoading] = React.useState(true);
 
   const {colors} = useTheme();
@@ -42,19 +40,18 @@ const Catalogue = ({navigation}) => {
           // We have data!!
           const cart = JSON.parse(datacart);
           data['quantity'] = 1;
-          console.log('45====>', data);
+
           cart.push(data);
           AsyncStorage.setItem('cart', JSON.stringify(cart));
           navigation.navigate('Cart');
         } else {
           const cart = [];
           data['quantity'] = 1;
-          console.log('45====>', data);
+
           cart.push(data);
           AsyncStorage.setItem('cart', JSON.stringify(cart));
           navigation.navigate('Cart');
         }
-        console.log('Add Cart');
       })
       .catch(err => {
         alert(err);
@@ -107,9 +104,7 @@ const Catalogue = ({navigation}) => {
                       <Card.Cover
                         key={index}
                         source={{
-                          uri:
-                            data.productImage != null &&
-                            JSON.parse(data.productImage)[0],
+                          uri: data.productImage,
                         }}
                       />
 

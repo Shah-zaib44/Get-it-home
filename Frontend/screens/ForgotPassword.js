@@ -6,7 +6,7 @@ import {useTheme} from '@react-navigation/native';
 
 const ForgotPassword = ({navigation}) => {
   const {colors} = useTheme();
-  const [email, setEmail] = React.useState('shahzafarzaib@gmail.com');
+  const [email, setEmail] = React.useState('');
   const forgotPassword = e => {
     let user = {
       email: email,
@@ -22,7 +22,6 @@ const ForgotPassword = ({navigation}) => {
     })
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         navigation.navigate('VerifyCode');
       });
   };

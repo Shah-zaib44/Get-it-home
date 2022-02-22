@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     profileImage: {
-      type: Sequelize.STRING,
+      type: Sequelize.JSON,
     },
     phoneNumber: {
       type: Sequelize.STRING,

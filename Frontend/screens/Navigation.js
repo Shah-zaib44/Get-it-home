@@ -6,6 +6,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ViewProduct from './admin/ViewProduct';
 import AddProduct from './admin/AddProduct';
 import Product from './admin/Product';
+import AccountAdmin from './admin/AccountAdmin';
+import Account from './Account';
 import Catalogue from './Catalogue';
 import Description from './Description';
 import ViewCoupon from './admin/ViewCoupon';
@@ -21,15 +23,19 @@ import VerifyCode from './VerifyCode';
 import Categories from './Categories';
 import ProductByCategory from './ProductByCategory';
 import BottomTabNavigation from './BottomTabNavigation';
-import TopTabNavigation from './admin/TopTabNavigation';
+import BottomTabNavigationAdmin from './admin/BottomTabNavigationAdmin';
 import Profile from './Profile';
+import ProfileAdmin from './admin/ProfileAdmin';
 import UpdatePassword from './UpdatePassword';
 import Cart from './Cart';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import NotFound from './NotFound';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const [userRole, setuserRole] = React.useState('');
+  const [userToken, setUserToken] = React.useState('');
   const MyTheme = {
     dark: false,
     colors: {
@@ -44,10 +50,27 @@ const App = () => {
       notification: 'rgb(255, 69, 58)',
     },
   };
+  const getData = async () => {
+    const user = await AsyncStorage.getItem('user');
 
+    if (user != null) {
+      console.log(user);
+      setUserToken(JSON.parse(user).token);
+      setuserRole(JSON.parse(user).user.role);
+    }
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
+  // userToken == ''
+  // ? 'SignUp'
+  // : userRole == 'User'
+  // ? 'BottomTabNavigation'
+  // : 'BottomTabNavigationAdmin'
   return (
     <NavigationContainer theme={MyTheme}>
-      <Stack.Navigator initialRouteName="BottomTabNavigation">
+      <Stack.Navigator initialRouteName="SignUp">
         <Stack.Screen
           options={{
             headerStyle: {
@@ -115,6 +138,16 @@ const App = () => {
             },
             headerTintColor: '#fff',
           }}
+          name="AccountAdmin"
+          component={AccountAdmin}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: MyTheme.colors.header,
+            },
+            headerTintColor: '#fff',
+          }}
           name="Coupon"
           component={Coupon}
         />
@@ -129,8 +162,8 @@ const App = () => {
           options={{
             headerShown: false,
           }}
-          name="TopTabNavigation"
-          component={TopTabNavigation}
+          name="BottomTabNavigationAdmin"
+          component={BottomTabNavigationAdmin}
         />
         <Stack.Screen
           options={{
@@ -209,6 +242,16 @@ const App = () => {
             },
             headerTintColor: '#fff',
           }}
+          name="ProfileAdmin"
+          component={ProfileAdmin}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: MyTheme.colors.header,
+            },
+            headerTintColor: '#fff',
+          }}
           name="ViewCoupon"
           component={ViewCoupon}
         />
@@ -271,6 +314,16 @@ const App = () => {
           }}
           name="AddCoupon"
           component={AddCoupon}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: MyTheme.colors.header,
+            },
+            headerTintColor: '#fff',
+          }}
+          name="Account"
+          component={Account}
         />
       </Stack.Navigator>
     </NavigationContainer>

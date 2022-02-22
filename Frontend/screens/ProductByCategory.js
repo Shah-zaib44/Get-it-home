@@ -16,11 +16,9 @@ import {useTheme} from '@react-navigation/native';
 
 const ProductByCategory = ({route, navigation}) => {
   const {colors} = useTheme();
-  const ratingCompleted = rating => {
-    console.log('Rating is: ' + rating);
-  };
+  const ratingCompleted = rating => {};
   const {category} = route.params;
-  console.log('Productbyat', category);
+
   const [isLoading, setLoading] = React.useState(true);
 
   const [data, setData] = React.useState([]);
@@ -39,12 +37,11 @@ const ProductByCategory = ({route, navigation}) => {
     });
   };
   const handleCart = data => {
-    console.log('Catalogue data:', data);
     navigation.navigate('Cart', {
       data: data,
     });
   };
-  console.log(data);
+
   React.useEffect(() => {
     getProduct();
   }, []);
@@ -101,9 +98,7 @@ const ProductByCategory = ({route, navigation}) => {
                       <Card.Cover
                         key={index}
                         source={{
-                          uri:
-                            data.productImage != null &&
-                            JSON.parse(data.productImage)[0],
+                          uri: data.productImage,
                         }}
                       />
 

@@ -3,11 +3,10 @@ import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {List} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Cart from './Cart';
-import Home from './Home';
-import Search from './Search';
-import Account from './Account';
-import Categories from './Categories';
+import Product from './Product';
+import Coupon from './Coupon';
+import AccountAdmin from './AccountAdmin';
+
 import {useTheme} from '@react-navigation/native';
 const Tab = createBottomTabNavigator();
 
@@ -28,43 +27,38 @@ function MyTabs() {
         tabBarActiveTintColor: '#fff',
       }}>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="Product"
+        component={Product}
+        options={{tabBarLabel: 'Product'}}
         options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="home" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Categories"
-        component={Categories}
-        options={{
-          tabBarLabel: 'Categories',
+          tabBarLabel: 'Product',
           tabBarIcon: ({color, size}) => (
             <List.Icon
               color={color}
               size={size}
-              icon={require('../assets/categories.png')}
+              icon={require('../../assets/categories.png')}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Coupon"
+        component={Coupon}
+        options={{
+          tabBarLabel: 'Coupon',
+          tabBarIcon: ({color, size}) => (
+            <List.Icon
+              color={color}
+              size={size}
+              icon={require('../../assets/categories.png')}
             />
           ),
         }}
       />
 
       <Tab.Screen
-        name="Cart"
-        component={Cart}
-        options={{
-          tabBarLabel: 'Cart',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="shopping-cart" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Account"
-        component={Account}
+        name="AccountAdmin"
+        component={AccountAdmin}
         options={{
           tabBarLabel: 'Account',
           tabBarIcon: ({color, size}) => (
@@ -76,6 +70,6 @@ function MyTabs() {
   );
 }
 
-export default function BottomTabNavigation() {
+export default function BottomTabNavigationAdmin() {
   return <MyTabs />;
 }

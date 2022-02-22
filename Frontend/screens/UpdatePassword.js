@@ -31,7 +31,6 @@ const UpdatePassword = ({navigation}) => {
     })
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         if (response.token) {
           AsyncStorage.setItem('user', JSON.stringify(response));
           navigation.navigate('SignIn');

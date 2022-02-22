@@ -30,7 +30,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     // Verify token
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("###inside protect", decoded.id);
+
     req.user = await User.findByPk(decoded.id);
 
     next();
@@ -41,8 +41,6 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
 // Grant access to specific roles
 exports.authorize = (...roles) => {
-  console.log("###inside authorize");
-
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       return next(

@@ -34,10 +34,8 @@ const Cart = ({navigation}) => {
       totalVal =
         totalVal +
         parseInt(cartItems[i].productPrice) * parseInt(cartItems[i].quantity);
-
-      console.log('--->', totalVal);
     }
-    console.log('--->1111', totalVal);
+
     setTotalPrice(totalVal);
     setgrandTotal(parseInt(totalVal) + 40);
   };
@@ -47,13 +45,12 @@ const Cart = ({navigation}) => {
       // We have data!!
       const cartItems = JSON.parse(cart);
       setcartData(cartItems);
-      console.log(cartItems, 'cartfood');
+
       total(cartItems);
     }
   };
   const removeData = async () => {
-    const del = await AsyncStorage.removeItem('cart');
-    console.log(del);
+    await AsyncStorage.removeItem('cart');
   };
   const handleCoupon = () => {
     fetch('http://10.0.2.2:8080/api/coupons/validateCoupon', {
@@ -67,7 +64,6 @@ const Cart = ({navigation}) => {
     })
       .then(response => response.json())
       .then(response => {
-        console.log('response===>', response.success);
         if (response.error) {
           onDismissSnackBar();
           setMsg(response.error);
@@ -123,9 +119,7 @@ const Cart = ({navigation}) => {
                       borderRadius: 5,
                     }}
                     source={{
-                      uri:
-                        data.productImage != null &&
-                        JSON.parse(data.productImage)[0],
+                      uri: data.productImage,
                     }}
                   />
                 </View>
@@ -421,7 +415,7 @@ const Cart = ({navigation}) => {
             }}
             onPress={() => {
               removeData();
-              getData();
+
               navigation.navigate('Success');
             }}
             mode="contained">
