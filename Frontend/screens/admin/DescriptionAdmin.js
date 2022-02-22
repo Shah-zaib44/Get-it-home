@@ -15,7 +15,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useTheme} from '@react-navigation/native';
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
-const Description = ({navigation, route}) => {
+const DescriptionAdmin = ({navigation, route}) => {
   const [userName, setuserName] = React.useState('');
   const [profileImage, setprofileImage] = React.useState('');
   const {colors} = useTheme();
@@ -38,47 +38,8 @@ const Description = ({navigation, route}) => {
       .catch(error => console.error(error));
   };
 
-  const handleReviewAndRating = () => {
-    navigation.navigate('ReviewAndRating', {
-      id: id,
-      fullName: userName,
-      profileImage: profileImage,
-    });
-  };
-  const getReviews = () => {
-    fetch(`http://10.0.2.2:8080/api/reviews/productId/${id}`)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        setReviews(response.data);
-      })
-      .catch(error => console.error(error));
-  };
-
-  const getData = async () => {
-    const user = await AsyncStorage.getItem('user');
-    if (user != null) {
-      setuserName(JSON.parse(user).user.fullName);
-      setprofileImage(JSON.parse(JSON.parse(user).user.profileImage)[0]);
-    }
-  };
-
-  const avg = () => {
-    var sum = 0;
-    for (var i = 0; i < reviews.length; i++) {
-      sum += parseInt(reviews[i].rating); //don't forget to add the base
-    }
-
-    var avg = sum / reviews.length;
-
-    return avg;
-  };
-  console.log(avg());
   React.useEffect(() => {
     getProductById();
-    getData();
-    getReviews();
-    setuserName(userName);
   }, []);
   return (
     <>
@@ -125,11 +86,7 @@ const Description = ({navigation, route}) => {
                 <Icon style={{color: 'black'}} size={30} name="heart" />
               </View>
             </View>
-            <Rating
-              startingValue={reviews.length != 0 && avg()}
-              readonly={true}
-              style={{paddingVertical: 10}}
-            />
+
             <Text>RS {data.productPrice}/-</Text>
             <Text>Description</Text>
             <Text>{data.productDescription}</Text>
@@ -169,56 +126,6 @@ const Description = ({navigation, route}) => {
               }}>
               <Chip>{data.colour}</Chip>
             </View>
-            <View style={{flexDirection: 'row'}}>
-              <Text>Product Review</Text>
-            </View>
-            {reviews.map((review, index) => {
-              return (
-                review.productId == id && (
-                  <View style={{marginBottom: 10}} key={index}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                      }}>
-                      {console.log(review.profileImage)}
-                      <View>
-                        <Avatar.Image
-                          size={40}
-                          source={{uri: JSON.parse(review.profileImage)}}
-                        />
-                      </View>
-                      <View>
-                        <Text style={{marginLeft: 10}}>{review.fullName}</Text>
-                        <Rating
-                          style={{marginLeft: 10, alignItems: 'flex-start'}}
-                          imageSize={20}
-                          readonly={true}
-                          startingValue={review.rating}
-                        />
-                      </View>
-                    </View>
-                    <Text>{review.review}</Text>
-
-                    {/* <Text>
-                      {new Date(
-                        new Date(review.createdAt)
-                          .toISOString()
-                          .slice(0, 10)
-                          .replace('T', ' '),
-                      ).toDateString()}
-                    </Text> */}
-                  </View>
-                )
-              );
-            })}
-            <Button
-              onPress={() => {
-                handleReviewAndRating();
-              }}
-              style={{backgroundColor: colors.button}}
-              mode="contained">
-              Add Review and Rating
-            </Button>
           </ScrollView>
         </SafeAreaView>
       )}
@@ -226,4 +133,4 @@ const Description = ({navigation, route}) => {
   );
 };
 
-export default Description;
+export default DescriptionAdmin;

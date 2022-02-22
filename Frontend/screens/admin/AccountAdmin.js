@@ -36,7 +36,15 @@ const AccountAdmin = ({navigation}) => {
               />
             )}
           />
-
+          <List.Item
+            onPress={() => {
+              navigation.navigate('Order');
+            }}
+            title="Order"
+            left={props => (
+              <List.Icon {...props} icon={require('../../assets/order.png')} />
+            )}
+          />
           <List.Item
             onPress={() => {
               removeItemValue('user');

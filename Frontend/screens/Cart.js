@@ -16,6 +16,7 @@ import NotFound from './NotFound';
 
 const Cart = ({navigation}) => {
   const isFocused = useIsFocused();
+  const [userName, setuserName] = React.useState('');
   const [couponCode, setcouponCode] = React.useState('');
   const {colors} = useTheme();
   const [cartData, setcartData] = React.useState([]);
@@ -52,6 +53,12 @@ const Cart = ({navigation}) => {
   const removeData = async () => {
     await AsyncStorage.removeItem('cart');
   };
+  const getUserData = async () => {
+    const user = await AsyncStorage.getItem('user');
+    if (user != null) {
+      setuserName(JSON.parse(user).user.fullName);
+    }
+  };
   const handleCoupon = () => {
     fetch('http://10.0.2.2:8080/api/coupons/validateCoupon', {
       method: 'POST',
@@ -69,15 +76,45 @@ const Cart = ({navigation}) => {
           setMsg(response.error);
           onToggleSnackBar();
         } else {
+          setTotalPrice(
+            Math.ceil(
+              totalPrice - totalPrice * (parseInt(response.data.amount) / 100),
+            ),
+          );
+          setgrandTotal(
+            Math.ceil(
+              totalPrice - totalPrice * (parseInt(response.data.amount) / 100),
+            ) + 40,
+          );
           onDismissSnackBar();
           setMsg('Valid coupon');
           onToggleSnackBar();
         }
       });
   };
+  const postOrder = () => {
+    fetch(`http://10.0.2.2:8080/api/orders/`, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        cartData,
+      }),
+    })
+      .then(response => response.json())
+      .then(response => {
+        setMsg('Data has been submitted successfully');
+        onToggleSnackBar();
+      })
+      .catch(error => setMsg('There is some error while submitting data'));
+  };
   React.useEffect(() => {
     if (isFocused) {
       getData();
+      getUserData();
     }
   }, [isFocused]);
   return (
@@ -414,6 +451,7 @@ const Cart = ({navigation}) => {
               marginBottom: 10,
             }}
             onPress={() => {
+              postOrder(cartData);
               removeData();
 
               navigation.navigate('Success');

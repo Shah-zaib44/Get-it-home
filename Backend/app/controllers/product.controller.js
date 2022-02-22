@@ -53,6 +53,7 @@ exports.create = (req, res, next) => {
 exports.findAll = (req, res) => {
   Product.findAll({
     attributes: ["id", "productName", "productPrice", "productImage"],
+    limit: 10,
   })
     .then((data) => {
       res.send(data);

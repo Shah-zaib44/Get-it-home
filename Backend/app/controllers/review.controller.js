@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op;
 const ErrorResponse = require("../utils/errorResponse");
 // Create and Save a new product
 exports.addReview = async (req, res, next) => {
-  req.body.productId = req.params.productId;
+  console.log(req.body);
   const review = await Review.create(req.body);
 
   res.status(201).json({

@@ -29,9 +29,10 @@ const Item = ({icon, title}) => (
 
 const Home = ({navigation}) => {
   const [images] = React.useState([
+    require('../assets/couponcode.png'),
+    require('../assets/couponcode1.jpg'),
+    require('../assets/couponcode2.jpg'),
     'https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ',
-    'https://i.picsum.photos/id/1014/6016/4000.jpg?hmac=yMXsznFliL_Y2E2M-qZEsOZE1micNu8TwgNlHj7kzs8',
-    'https://i.picsum.photos/id/1029/4887/2759.jpg?hmac=uMSExsgG8_PWwP9he9Y0LQ4bFDLlij7voa9lU9KMXDE',
   ]);
   const renderItem = ({item}) => <Item title={item.title} icon={item.icon} />;
   return (

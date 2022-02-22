@@ -3,7 +3,8 @@ import React from 'react';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import ViewProduct from './admin/ViewProduct';
+import CatalogueAdmin from './admin/CatalogueAdmin';
+import DescriptionAdmin from './admin/DescriptionAdmin';
 import AddProduct from './admin/AddProduct';
 import Product from './admin/Product';
 import AccountAdmin from './admin/AccountAdmin';
@@ -18,6 +19,7 @@ import SignUp from './SignUp';
 import Filter from './Filter';
 import Success from './Success';
 import SignIn from './SignIn';
+import ReviewAndRating from './ReviewAndRating';
 import ForgotPassword from './ForgotPassword';
 import VerifyCode from './VerifyCode';
 import Categories from './Categories';
@@ -28,14 +30,13 @@ import Profile from './Profile';
 import ProfileAdmin from './admin/ProfileAdmin';
 import UpdatePassword from './UpdatePassword';
 import Cart from './Cart';
+import Order from './admin/Order';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NotFound from './NotFound';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [userRole, setuserRole] = React.useState('');
-  const [userToken, setUserToken] = React.useState('');
   const MyTheme = {
     dark: false,
     colors: {
@@ -50,24 +51,7 @@ const App = () => {
       notification: 'rgb(255, 69, 58)',
     },
   };
-  const getData = async () => {
-    const user = await AsyncStorage.getItem('user');
 
-    if (user != null) {
-      console.log(user);
-      setUserToken(JSON.parse(user).token);
-      setuserRole(JSON.parse(user).user.role);
-    }
-  };
-
-  React.useEffect(() => {
-    getData();
-  }, []);
-  // userToken == ''
-  // ? 'SignUp'
-  // : userRole == 'User'
-  // ? 'BottomTabNavigation'
-  // : 'BottomTabNavigationAdmin'
   return (
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator initialRouteName="SignUp">
@@ -80,6 +64,36 @@ const App = () => {
           }}
           name="Cart"
           component={Cart}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: MyTheme.colors.header,
+            },
+            headerTintColor: '#fff',
+          }}
+          name="Order"
+          component={Order}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: MyTheme.colors.header,
+            },
+            headerTintColor: '#fff',
+          }}
+          name="CatalogueAdmin"
+          component={CatalogueAdmin}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: MyTheme.colors.header,
+            },
+            headerTintColor: '#fff',
+          }}
+          name="DescriptionAdmin"
+          component={DescriptionAdmin}
         />
         <Stack.Screen
           options={{
@@ -110,6 +124,16 @@ const App = () => {
           }}
           name="ProductByCategory"
           component={ProductByCategory}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: MyTheme.colors.header,
+            },
+            headerTintColor: '#fff',
+          }}
+          name="ReviewAndRating"
+          component={ReviewAndRating}
         />
         <Stack.Screen
           options={{
@@ -285,16 +309,7 @@ const App = () => {
           name="Description"
           component={Description}
         />
-        <Stack.Screen
-          options={{
-            headerStyle: {
-              backgroundColor: MyTheme.colors.header,
-            },
-            headerTintColor: '#fff',
-          }}
-          name="ViewProduct"
-          component={ViewProduct}
-        />
+
         <Stack.Screen
           options={{
             headerStyle: {

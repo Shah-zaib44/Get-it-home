@@ -1,30 +1,26 @@
 import * as React from 'react';
-import {View, TouchableOpacity, ScrollView} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   Card,
   Title,
   ActivityIndicator,
   Colors,
-  Button,
   List,
+  Button,
 } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {View, ScrollView, TouchableOpacity} from 'react-native';
 import {Rating} from 'react-native-ratings';
-import {categories} from '../data';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useTheme} from '@react-navigation/native';
-
-const ProductByCategory = ({route, navigation}) => {
-  const {colors} = useTheme();
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const CatalogueAdmin = ({navigation}) => {
   const ratingCompleted = rating => {};
-  const {category} = route.params;
-
   const [isLoading, setLoading] = React.useState(true);
+
+  const {colors} = useTheme();
 
   const [data, setData] = React.useState([]);
   const getProduct = () => {
-    fetch(`http://10.0.2.2:8080/api/products/category?category=${category}`)
+    fetch('http://10.0.2.2:8080/api/products')
       .then(response => response.json())
       .then(response => {
         setData(response);
@@ -33,33 +29,9 @@ const ProductByCategory = ({route, navigation}) => {
       .catch(error => console.error(error));
   };
   const toggleShow = id => {
-    navigation.navigate('Description', {
+    navigation.navigate('DescriptionAdmin', {
       id: id,
     });
-  };
-  const handleCart = data => {
-    AsyncStorage.getItem('cart')
-      .then(datacart => {
-        if (datacart !== null) {
-          // We have data!!
-          const cart = JSON.parse(datacart);
-          data['quantity'] = 1;
-
-          cart.push(data);
-          AsyncStorage.setItem('cart', JSON.stringify(cart));
-          navigation.navigate('Cart');
-        } else {
-          const cart = [];
-          data['quantity'] = 1;
-
-          cart.push(data);
-          AsyncStorage.setItem('cart', JSON.stringify(cart));
-          navigation.navigate('Cart');
-        }
-      })
-      .catch(err => {
-        alert(err);
-      });
   };
 
   React.useEffect(() => {
@@ -97,15 +69,6 @@ const ProductByCategory = ({route, navigation}) => {
             paddingHorizontal: 10,
             backgroundColor: 'white',
           }}>
-          <View style={{alignItems: 'flex-end'}}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Filter');
-              }}>
-              <List.Icon icon={require('../assets/filter.png')} />
-            </TouchableOpacity>
-          </View>
-
           <ScrollView>
             <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
               {data.map((data, index) => {
@@ -124,21 +87,8 @@ const ProductByCategory = ({route, navigation}) => {
 
                       <Card.Content>
                         <Title>{data.productName}</Title>
-                        <Rating
-                          onFinishRating={ratingCompleted}
-                          style={{paddingVertical: 10}}
-                          imageSize={30}
-                        />
+
                         <Title>RS {data.productPrice}/-</Title>
-                        <Button
-                          style={{backgroundColor: colors.button}}
-                          labelStyle={{fontSize: 12}}
-                          mode="contained"
-                          onPress={() => {
-                            handleCart(data);
-                          }}>
-                          Add to Cart
-                        </Button>
                       </Card.Content>
                     </Card>
                   </TouchableOpacity>
@@ -152,4 +102,4 @@ const ProductByCategory = ({route, navigation}) => {
   );
 };
 
-export default ProductByCategory;
+export default CatalogueAdmin;

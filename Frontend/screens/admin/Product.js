@@ -22,7 +22,7 @@ const Product = ({navigation}) => {
           <List.Item
             title="View Product"
             onPress={() => {
-              navigation.navigate('ViewProduct');
+              navigation.navigate('CatalogueAdmin');
             }}
           />
         </View>

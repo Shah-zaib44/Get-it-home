@@ -36,7 +36,7 @@ function MyTabs() {
             <List.Icon
               color={color}
               size={size}
-              icon={require('../../assets/categories.png')}
+              icon={require('../../assets/producticon.png')}
             />
           ),
         }}
@@ -50,7 +50,7 @@ function MyTabs() {
             <List.Icon
               color={color}
               size={size}
-              icon={require('../../assets/categories.png')}
+              icon={require('../../assets/couponicon.png')}
             />
           ),
         }}

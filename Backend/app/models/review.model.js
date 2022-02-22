@@ -9,6 +9,12 @@ module.exports = (sequelize, Sequelize) => {
     review: {
       type: Sequelize.STRING,
     },
+    profileImage: {
+      type: Sequelize.JSON,
+    },
+    fullName: {
+      type: Sequelize.STRING,
+    },
   });
 
   return Review;
